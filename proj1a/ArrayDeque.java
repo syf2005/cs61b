@@ -69,7 +69,7 @@ public class ArrayDeque<T> {
     public void addFirst(T item) {
         capacityManagement();
         if (frontIndex == 0) {
-            frontIndex = size - 1;
+            frontIndex = capacity - 1;
         } else {
             frontIndex = frontIndex - 1;
         }
@@ -78,14 +78,13 @@ public class ArrayDeque<T> {
 
     }
 
+    /*处理前索引位置和后索引位置的方法并不相同，如果都先移动再写入，会导致中间留空*/
     public void addLast(T item) {
-        capacityManagement();
-        if (endIndex == size - 1) {
-            endIndex = 0;
-        } else {
-            endIndex = endIndex + 1;
+        if (endIndex == capacity) {
+            capacityManagement();
         }
         data[endIndex] = item;
+        endIndex = endIndex + 1;
         size++;
     }
 
@@ -109,7 +108,7 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        if (frontIndex == size - 1) {
+        if (frontIndex == capacity - 1) {
             T temp = data[frontIndex];
             data[frontIndex] = null;
             frontIndex = 0;
@@ -130,24 +129,21 @@ public class ArrayDeque<T> {
             return null;
         }
         if (endIndex == 0) {
-            T temp = data[endIndex];
-            data[endIndex] = null;
-            endIndex = size - 1;
+            endIndex = capacity - 1;
             size--;
-            return temp;
         } else {
-            T temp = data[endIndex];
-            data[endIndex] = null;
             endIndex--;
             size--;
-            return temp;
         }
+        T temp = data[endIndex];
+        data[endIndex] = null;
+        return temp;
     }
 
     public T get(int index) {
-        int ptr = frontIndex + size;
-        if (ptr >= size) {
-            ptr = ptr - size;
+        int ptr = frontIndex + index;
+        if (ptr >= capacity) {
+            ptr = ptr - capacity;
         }
         return data[ptr];
     }

@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-    private T item;
+    private T content;
     private int length;
     private LinkedListDeque<T> forward;
     private LinkedListDeque<T> backward;
@@ -7,8 +7,8 @@ public class LinkedListDeque<T> {
     private LinkedListDeque<T> tailHelper;
 
 
-    public LinkedListDeque(T item, LinkedListDeque<T> forward, LinkedListDeque<T> backward) {
-        this.item = item;
+    private LinkedListDeque(T item, LinkedListDeque<T> forward, LinkedListDeque<T> backward) {
+        this.content = item;
         this.forward = forward;
         this.backward = backward;
         this.tailHelper = null;
@@ -17,14 +17,14 @@ public class LinkedListDeque<T> {
     }
 
     public LinkedListDeque() {
-        this.item = null;
+        this.content = null;
         this.length = 0;
         this.forward = null;
         this.backward = null;
-        LinkedListDeque<T> headHelper = new LinkedListDeque<>(null, null, null);
-        LinkedListDeque<T> tailHelper = new LinkedListDeque<>(null, null, null);
-        this.headHelper = headHelper;
-        this.tailHelper = tailHelper;
+        LinkedListDeque<T> head = new LinkedListDeque<>(null, null, null);
+        LinkedListDeque<T> tail = new LinkedListDeque<>(null, null, null);
+        this.headHelper = head;
+        this.tailHelper = tail;
         this.headHelper.forward = this.tailHelper;
         this.tailHelper.backward = this.headHelper;
     }
@@ -62,7 +62,7 @@ public class LinkedListDeque<T> {
     public void printDeque() {
         LinkedListDeque<T> ptr = headHelper.forward;
         while (ptr.forward != null) {
-            System.out.println(ptr.item);
+            System.out.println(ptr.content);
             ptr = ptr.forward;
         }
     }
@@ -71,7 +71,7 @@ public class LinkedListDeque<T> {
         if (length > 0) {
             LinkedListDeque<T> ptr1 = headHelper;
             LinkedListDeque<T> ptr2 = ptr1.forward.forward;
-            T temp = ptr1.forward.item;
+            T temp = ptr1.forward.content;
             ptr1.forward.forward = null;
             ptr1.forward.backward = null;
             ptr1.forward = ptr2;
@@ -86,8 +86,8 @@ public class LinkedListDeque<T> {
     public T removeLast() {
         if (length > 0) {
             LinkedListDeque<T> ptr1 = tailHelper;
-            LinkedListDeque<T> ptr2 = ptr1.backward.forward;
-            T temp = ptr1.backward.item;
+            LinkedListDeque<T> ptr2 = ptr1.backward.backward;
+            T temp = ptr1.backward.content;
             ptr1.backward.forward = null;
             ptr1.backward.backward = null;
             ptr1.backward = ptr2;
@@ -108,13 +108,13 @@ public class LinkedListDeque<T> {
             for (int i = 0; i < index; i++) {
                 ptr = ptr.forward;
             }
-            return ptr.item;
+            return ptr.content;
         }
     }
 
     private T getRecursiveHelper(LinkedListDeque<T> ptr, int left) {
         if (left == 0) {
-            return ptr.item;
+            return ptr.content;
         } else {
             return getRecursiveHelper(ptr.forward, left - 1);
         }
