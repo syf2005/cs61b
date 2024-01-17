@@ -3,7 +3,6 @@ public class ArrayDeque<T> {
     private int capacity;
     private int extendRatio = 2;
     private int frontIndex;
-    private int endIndex;
     private int size;
 
     public ArrayDeque() {
@@ -11,56 +10,30 @@ public class ArrayDeque<T> {
         this.capacity = 8;
         this.size = 0;
         this.frontIndex = 0;
-        this.endIndex = 0;
-    }
-
-    private int[] generateCurrentValidIndex() {
-        int[] result = new int[size];
-        if (frontIndex <= endIndex) {
-            int ptr = 0;
-            for (int i = frontIndex; i < endIndex; i++) {
-                result[ptr] = i;
-                ptr++;
-            }
-        } else {
-            int ptr = 0;
-            for (int i = frontIndex; i < capacity; i++) {
-                result[ptr] = i;
-                ptr++;
-            }
-            for (int i = 0; i < endIndex; i++) {
-                result[ptr] = i;
-                ptr++;
-            }
-        }
-        return result;
     }
 
     private void capacityManagement() {
         if (size == capacity) {
             T[] extendedData = (T[]) new Object[capacity * extendRatio];
-            int[] index = generateCurrentValidIndex();
             int ptr = 0;
-            for (int element : index) {
-                extendedData[ptr] = data[element];
+            for (int i = 0; i < size; i++) {
+                extendedData[ptr] = data[(frontIndex + i) % capacity];
+                ptr++;
             }
             this.capacity = capacity * extendRatio;
             this.data = extendedData;
             this.frontIndex = 0;
-            this.endIndex = size;
-
         }
-        if (((double) size / capacity) < 0.3 && capacity >= 16) {
+        if (((double) size / capacity) <= 0.4 && capacity >= 16) {
             T[] shortedData = (T[]) new Object[capacity / extendRatio];
-            int[] index = generateCurrentValidIndex();
             int ptr = 0;
-            for (int element : index) {
-                shortedData[ptr] = data[element];
+            for (int i = 0; i < size; i++) {
+                shortedData[ptr] = data[(frontIndex + i) % capacity];
+                ptr++;
             }
             this.capacity = capacity / extendRatio;
             this.data = shortedData;
             this.frontIndex = 0;
-            this.endIndex = size;
         }
 
 
@@ -78,13 +51,14 @@ public class ArrayDeque<T> {
 
     }
 
-    /*处理前索引位置和后索引位置的方法并不相同，如果都先移动再写入，会导致中间留空*/
+    /*
+     * 处理前索引位置和后索引位置的方法并不相同，如果都先移动再写入，会导致中间留空
+     * 上为历史备注
+     * 现删除了后索引位置，操作明显简便
+     */
     public void addLast(T item) {
-        if (endIndex == capacity) {
-            capacityManagement();
-        }
-        data[endIndex] = item;
-        endIndex = endIndex + 1;
+        capacityManagement();
+        data[(frontIndex + size) % capacity] = item;
         size++;
     }
 
@@ -97,9 +71,8 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int[] index = generateCurrentValidIndex();
-        for (int element : index) {
-            System.out.print(data[element] + " ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(data[(frontIndex + i) % capacity] + " ");
         }
     }
 
@@ -128,24 +101,14 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        if (endIndex == 0) {
-            endIndex = capacity - 1;
-            size--;
-        } else {
-            endIndex--;
-            size--;
-        }
-        T temp = data[endIndex];
-        data[endIndex] = null;
+        T temp = data[(frontIndex + size - 1) % capacity];
+        data[(frontIndex + size - 1) % capacity] = null;
+        size--;
         return temp;
     }
 
     public T get(int index) {
-        int ptr = frontIndex + index;
-        if (ptr >= capacity) {
-            ptr = ptr - capacity;
-        }
-        return data[ptr];
+        return data[(frontIndex + index) % capacity];
     }
 
 
