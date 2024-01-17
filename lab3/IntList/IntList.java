@@ -11,11 +11,11 @@ public class IntList {
     /**
      * First element of list.
      */
-    public int first;
+    private int first;
     /**
      * Remaining elements of list.
      */
-    public IntList rest;
+    private IntList rest;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -81,16 +81,14 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
         IntList ptrA = A;
-        if (A==null) {
+        if (A == null) {
             return B;
-        }
-        else {
-            while (ptrA.rest!=null){
-                ptrA=ptrA.rest;
+        } else {
+            while (ptrA.rest != null) {
+                ptrA = ptrA.rest;
             }
-            ptrA.rest=B;
+            ptrA.rest = B;
         }
         return A;
     }
@@ -100,7 +98,6 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
         IntList ptrA = A;
         IntList ptrB = B;
 
@@ -108,16 +105,16 @@ public class IntList {
 
         IntList ptrR = result;
 
-        while (ptrA != null){
-            IntList Node = new IntList(ptrA.first,ptrA.rest);
-            ptrR.rest = Node;
+        while (ptrA != null) {
+            IntList node = new IntList(ptrA.first, ptrA.rest);
+            ptrR.rest = node;
             ptrR = ptrR.rest;
             ptrA = ptrA.rest;
         }
 
-        while (ptrB != null){
-            IntList Node = new IntList(ptrB.first,ptrB.rest);
-            ptrR.rest = Node;
+        while (ptrB != null) {
+            IntList node = new IntList(ptrB.first, ptrB.rest);
+            ptrR.rest = node;
             ptrR = ptrR.rest;
             ptrB = ptrB.rest;
         }
@@ -125,18 +122,17 @@ public class IntList {
         return result.rest;
     }
 
-    public static IntList reverse(IntList A){
-        IntList ptr_fast = A;
-        IntList ptr_slow = null;
+    public static IntList reverse(IntList A) {
+        IntList ptrFast = A;
+        IntList ptrSlow = null;
         IntList temp;
-        while (ptr_fast != null){
-            temp = ptr_fast.rest;
-            ptr_fast.rest=ptr_slow;
-            ptr_slow= ptr_fast;
-            ptr_fast=temp;
+        while (ptrFast != null) {
+            temp = ptrFast.rest;
+            ptrFast.rest = ptrSlow;
+            ptrSlow = ptrFast;
+            ptrFast = temp;
         }
-        A = ptr_slow;
-        return ptr_slow;
+        return ptrSlow;
     }
 
 

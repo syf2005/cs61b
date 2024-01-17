@@ -74,7 +74,7 @@ public class IntListTest {
         IntList C = null;
         assertEquals(B, IntList.reverse(A));
         assertEquals(null, IntList.reverse(C));
-        assertNotEquals(IntList.of(4,3,2,1),B);
+        assertNotEquals(IntList.of(1, 2, 3, 4), A);
     }
 
     /** If you're running this from the command line, you'll need
