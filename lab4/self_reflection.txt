@@ -4,27 +4,27 @@ ArrayDeque:
 
 Q: Give an example of at least one idea from the staff solution that would have made your solution better (if any).
 
-A: 
+A: The idea of computing the usage of array to adjust the capacity is very impressive to me. 
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: 
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: In method capacityManagement, there is some repetition of some code, and it can be simplified.
 
 Q: What did you learn by talking to your partner about writing ArrayDeque?
 
-A:
+A: Self-learning.
 
 Q: What do you wish you would have known before writing ArrayDeque, if anything?
 
-A:
+A: I wish I had knew the circular way to build ArrayDeque, specifically.
 
 Q: If you wrote ArrayDeque again, what would you do differently, if anything?
 
-A:
+A: Indeed, I wrote ArrayDeque again, rewrote many methods making it more elegant, such as removing tracking the endIndex, stop tracking the valid index of data array, and using a common way to process circle more efficiently.
 
 -----
 
@@ -36,11 +36,11 @@ A:
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: Correct in one try. Wonderful time complexity.
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: The subsidiary node and the data node using the same class, so there is some memory space wasted, and kind of inelegent.
 
 Q: What did you learn by talking to your partner about writing LinkedListDeque?
 
@@ -48,11 +48,11 @@ A:
 
 Q: What do you wish you would have known before writing LinkedListDeque, if anything?
 
-A:
+A: Nested class.
 
 Q: If you wrote LinkedListDeque again, what would you do differently, if anything?
 
-A:
+A: Using Nested class, making data node another good type.
 
 -----
 
@@ -60,4 +60,4 @@ Meta:
 
 Q: Did you like this design review process? Anything we should do differently next time?
 
-A: 
+A: Very like.
