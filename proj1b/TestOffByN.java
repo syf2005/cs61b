@@ -9,7 +9,7 @@ public class TestOffByN {
     @Test
     public void test() {
         assertTrue(offByN.equalChars('a', 'f'));
-        assertFalse(offByN.equalChars('f', 'a'));
+        assertTrue(offByN.equalChars('f', 'a'));
         assertFalse(offByN.equalChars('f', 'h'));
     }
 

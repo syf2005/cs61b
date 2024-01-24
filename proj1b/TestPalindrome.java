@@ -30,11 +30,10 @@ public class TestPalindrome {
     @Test
     public void testIsPalindromeOverload() {
         OffByOne cc = new OffByOne();
-        assertFalse(palindrome.isPalindrome("fudanuniversity", cc));
-        assertNotEquals(false, palindrome.isPalindrome("u", cc));
+        assertFalse(palindrome.isPalindrome("aba", cc));
         assertTrue(palindrome.isPalindrome("", cc));
-        assertTrue(palindrome.isPalindrome("volov", cc));
-        assertTrue(palindrome.isPalindrome("auuuuuua", cc));
+        assertTrue(palindrome.isPalindrome("a", cc));
+        assertTrue(palindrome.isPalindrome("abb", cc));
         assertFalse(palindrome.isPalindrome("wwjwww", cc));
     }
 }

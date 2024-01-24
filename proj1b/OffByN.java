@@ -8,6 +8,6 @@ public class OffByN implements CharacterComparator {
 
     @Override
     public boolean equalChars(char x, char y) {
-        return y - x == this.N;
+        return y - x == this.N || x - y == this.N;
     }
 }
