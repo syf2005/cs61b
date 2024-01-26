@@ -16,13 +16,13 @@ public class TestArrayDequeGold {
                 correct.addFirst(temp);
                 student.addFirst(temp);
                 sizeTracker++;
-                System.out.println("addFirst(" + temp + ")");
+                System.out.println("addFirst("+temp+")");
             } else {
                 int temp = StdRandom.uniform(1024);
                 correct.addLast(temp);
                 student.addLast(temp);
                 sizeTracker++;
-                System.out.println("addLast(" + temp + ")");
+                System.out.println("addLast("+temp+")");
             }
         }
         for (int i = 0; i < 500000; i++) {
@@ -31,7 +31,7 @@ public class TestArrayDequeGold {
                     System.out.println("removeFirst()");
                     assertEquals(correct.removeFirst(), student.removeFirst());
                 } else {
-                    System.out.println("removeLast()");
+
                     assertEquals(correct.removeLast(), student.removeLast());
                 }
                 sizeTracker--;
@@ -41,13 +41,13 @@ public class TestArrayDequeGold {
                     correct.addFirst(temp);
                     student.addFirst(temp);
                     sizeTracker++;
-                    System.out.println("addFirst(" + temp + ")");
+                    System.out.println("addFirst("+temp+")");
                 } else {
                     int temp = StdRandom.uniform(1024);
                     correct.addLast(temp);
                     student.addLast(temp);
                     sizeTracker++;
-                    System.out.println("addLast(" + temp + ")");
+                    System.out.println("addLast("+temp+")");
                 }
             }
         }
